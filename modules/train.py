@@ -8,7 +8,7 @@ if __name__ == "__main__":
     
     df = pd.read_csv('dataset/fact_train_test.csv')
     
-    df = preprocess(df)
+    df = support_funcs.preprocess(df)
 
     sup.show_timeseries(df)
     
