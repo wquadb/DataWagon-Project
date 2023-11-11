@@ -1,12 +1,12 @@
-import support_func
+
 import matplotlib.pyplot as plt
 import pandas as pd
 
 def main():
 
-    df = pd.read_csv(input())
+    df = pd.read_csv('dataset/fact_train_test.csv')
 
-    print(df.head())
+    print(df)
 
     return 0
 
