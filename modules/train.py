@@ -1,15 +1,21 @@
 import torch
 import scipy
 import pandas as pd
-import support_funcs
 import support_funcs as sup
 
-if __name__ == "__main__":
+def main_show():
     
     df = pd.read_csv('dataset/fact_train_test.csv')
     
-    df = support_funcs.preprocess(df)
+    df, ds = sup.preprocess(df)
 
-    sup.show_timeseries(df)
+    sup.show_timeseries(ds)
     
-    print(df)
+    sup.show_correlation(df['real_weight'], df['real_wagon_count'])
+
+if __name__ == "__main__":
+
+    main_show()
+
+
+    
