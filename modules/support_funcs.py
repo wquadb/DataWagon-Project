@@ -21,14 +21,13 @@ def show_correlation(series_1: pd.Series, series_2: pd.Series):
 
     plt.xlabel(f"{series_1.name}", fontsize=14, labelpad=15)
     plt.ylabel(f"{series_2.name}", fontsize=14, labelpad=15)
-    plt.title("bank_clients", fontsize=14, pad=15)
     plt.show()
 
     return 0
 
 def show_timeseries(df):
     fig, axes = plt.subplots(nrows=1, ncols=1, figsize=(25,15))
-    df.plot.line(x="empty", y='period', color='b', ax = axes, rot=0)
+    df.plot(kind='line', x="rps", y='day', color='b', ax = axes, rot=0)
     plt.show()
 
 def preprocess(df: pd.DataFrame) -> pd.DataFrame:
@@ -42,18 +41,10 @@ def preprocess(df: pd.DataFrame) -> pd.DataFrame:
 
     df['period'] = pd.to_datetime(df['period'], format=r'%Y-%m-%d')
 
-    df['period'] = df['period'] - df['period'].min()
-
-    df['period'] = df['period'].dt.days
-
-    ds = df.groupby(['period']).count()
+    ds = df.pivot_table(columns=['period'], aggfunc='size')
 
     return df, ds
 
 if __name__ == "__main__":
-    
-    df = pd.read_csv('dataset/fact_train_test.csv')
 
-    df, ds = preprocess(df)
-
-    show_timeseries(ds)
+    pass
