@@ -1,6 +1,7 @@
 from matplotlib import pyplot as plt
 import pandas as pd
 
+
 def show_correlation(series_1: pd.Series, series_2: pd.Series):
     
     """
@@ -24,3 +25,35 @@ def show_correlation(series_1: pd.Series, series_2: pd.Series):
     plt.show()
 
     return 0
+
+def show_timeseries(df):
+    fig, axes = plt.subplots(nrows=1, ncols=1, figsize=(25,15))
+    df.plot.line(x="empty", y='period', color='b', ax = axes, rot=0)
+    plt.show()
+
+def preprocess(df: pd.DataFrame) -> pd.DataFrame:
+
+    """
+    takes DataFrame with column 'date' and change dates 
+    to the number of days from the earliest day
+
+    also creates duplicate for visualising graph
+    """
+
+    df['period'] = pd.to_datetime(df['period'], format=r'%Y-%m-%d')
+
+    df['period'] = df['period'] - df['period'].min()
+
+    df['period'] = df['period'].dt.days
+
+    ds = df.groupby(['period']).count()
+
+    return df, ds
+
+if __name__ == "__main__":
+    
+    df = pd.read_csv('dataset/fact_train_test.csv')
+
+    df, ds = preprocess(df)
+
+    show_timeseries(ds)

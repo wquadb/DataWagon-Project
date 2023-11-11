@@ -1,41 +1,15 @@
 import torch
-import scipy 
+import scipy
+import pandas as pd
 import support_funcs
-
-
-def main():
-    class Model_torch(torch.nn.Module):
-        def __init__():
-            
-            #
-            #
-
-            return 0
-            
-        def forward_prop():
-            
-            #
-            #
-
-            return 0
-
-        def back_prop():
-            
-            #
-            #
-            
-            return 0 
-
-    Train_mod = Model_torch()
-
-
-
-
-    return Train_mod
-
+import support_funcs as sup
 
 if __name__ == "__main__":
-    model = main()
-    PATH = input("type where to save trained model:\n")
-    torch.save(model.state_dict(), PATH)
+    
+    df = pd.read_csv('dataset/fact_train_test.csv')
+    
+    df = preprocess(df)
 
+    sup.show_timeseries(df)
+    
+    print(df)
