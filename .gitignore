@@ -3,3 +3,4 @@ dataset
 venv
 .venv/
 .idea/
+modules/__pychache__/
