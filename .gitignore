@@ -1,2 +1,5 @@
-venv
+modules/dataset/
 dataset
+venv
+.venv/
+.idea/
